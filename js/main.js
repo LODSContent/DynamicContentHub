@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let currentPostId = 3; // Start with the Foothills trail
-    let posts = [];
+    let posts = []; //This line is crucial, it needs to be here to receive the data.
+    //The following line should be updated to use the data provided by the server.  I am assuming this variable is populated elsewhere.
+    let currentPostId = posts[posts.length - 1].id; // Start with the latest post
 
     // Sidebar toggle functionality
     const sidebarToggle = document.getElementById('sidebarToggle');
@@ -14,16 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebarToggle.classList.toggle('active');
         blogNav.classList.toggle('active');
     });
-
-    // Load blog data
-    fetch('/data/data.json')
-        .then(response => response.json())
-        .then(data => {
-            posts = data.posts;
-            setupSidebar(posts);
-            displayPost(currentPostId);
-        })
-        .catch(error => console.error('Error loading blog data:', error));
 
     // Category expansion
     const categoryHeaders = document.querySelectorAll('.category-header');
@@ -54,31 +45,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    function setupSidebar(posts) {
-        const categories = {};
-        posts.forEach(post => {
-            if (!categories[post.category]) {
-                categories[post.category] = [];
+    // Setup sidebar links
+    document.querySelectorAll('.category-items a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const postId = parseInt(link.dataset.postId);
+            if (postId) {
+                displayPost(postId);
+                document.querySelectorAll('.category-items a').forEach(a => {
+                    a.classList.remove('active');
+                });
+                link.classList.add('active');
             }
-            categories[post.category].push(post);
         });
-
-        // Update sidebar links with click handlers
-        document.querySelectorAll('.category-items a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const postTitle = link.textContent.trim().replace(' →', '').replace(/\s*[→➜]\s*$/, '').replace(/\s+$/, '');
-                const post = posts.find(p => p.title.toLowerCase() === postTitle.toLowerCase());
-                if (post) {
-                    displayPost(post.id);
-                    document.querySelectorAll('.category-items a').forEach(a => {
-                        a.classList.remove('active');
-                    });
-                    link.classList.add('active');
-                }
-            });
-        });
-    }
+    });
 
     function navigatePost(direction) {
         const currentIndex = posts.findIndex(post => post.id === currentPostId);
@@ -114,8 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update active state in sidebar
         document.querySelectorAll('.category-items a').forEach(link => {
-            const linkText = link.textContent.trim().replace(/\s*[→➜]\s*$/, '').replace(/\s+$/, '');
-            if (linkText.toLowerCase() === post.title.toLowerCase()) {
+            const linkPostId = parseInt(link.dataset.postId);
+            if (linkPostId === post.id) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
