@@ -106,21 +106,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach initial handlers
     attachPostLinkHandlers();
 
-    // Periodically check for updates
-    setInterval(async () => {
+    // Function to check for updates
+    async function checkForUpdates() {
         try {
             const response = await fetch('/api/posts');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const newPosts = await response.json();
 
-            // Check if there are any changes
-            if (JSON.stringify(posts) !== JSON.stringify(newPosts)) {
+            // Check if number of posts has changed
+            if (newPosts.length !== posts.length) {
+                console.log('New posts detected, updating sidebar...');
                 posts = newPosts; // Update the global posts variable
+                updateSidebar(newPosts);
+                return;
+            }
+
+            // Check if any post content has changed
+            const hasChanges = newPosts.some((newPost, index) => {
+                return JSON.stringify(newPost) !== JSON.stringify(posts[index]);
+            });
+
+            if (hasChanges) {
+                console.log('Post changes detected, updating sidebar...');
+                posts = newPosts;
                 updateSidebar(newPosts);
             }
         } catch (error) {
             console.error('Error checking for updates:', error);
         }
-    }, 30000); // Check every 30 seconds
+    }
+
+    // Start periodic updates
+    setInterval(checkForUpdates, 5000); // Check every 5 seconds
 
     // Navigation buttons functionality
     const navButtons = document.querySelectorAll('.nav-button');

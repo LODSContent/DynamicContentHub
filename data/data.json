@@ -67,6 +67,19 @@
         "Created via API"
       ],
       "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1"
+    },
+    {
+      "id": 6,
+      "title": "API Test Post 2",
+      "category": "Hiking",
+      "date": "2025-02-05",
+      "start": "N/A",
+      "end": "N/A",
+      "content": [
+        "Testing the dynamic sidebar update",
+        "This post should appear automatically"
+      ],
+      "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a"
     }
   ]
 }
