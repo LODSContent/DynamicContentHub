@@ -79,9 +79,10 @@ main {
     gap: 0.5rem;
 }
 
+/* For the category items container, set a consistent width */
 .category-items {
     list-style: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;  /* Reduced padding to allow for wider boxes */
 }
 
 .category-items li {
@@ -93,9 +94,10 @@ main {
     text-decoration: none;
     display: block;
     padding: 0.8rem;
-    border: 1px solid #ddd;  /* Add border around blog titles */
+    border: 1px solid #ddd;
     border-radius: 4px;
     transition: all 0.2s ease;
+    background-color: white;  /* Explicitly set white background */
 }
 
 .category-items a:hover {
@@ -107,10 +109,9 @@ main {
     color: var(--header-green);
     font-weight: bold;
     border-color: var(--header-green);
-    background-color: rgba(85, 107, 47, 0.1);
-    padding-left: 1.2rem;  /* Add more left padding for indentation */
-    border-left: 3px solid var(--header-green);  /* Add vertical line */
+    padding-left: 1.2rem;  /* Keep the indentation */
 }
+
 
 /* Content Styles */
 .content {
