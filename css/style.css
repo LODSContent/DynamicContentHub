@@ -183,7 +183,9 @@ footer {
     background-color: var(--header-green);
     color: white;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Design */
@@ -192,6 +194,7 @@ footer {
         position: fixed;
         left: -100%;
         transition: left 0.3s ease;
+        z-index: 99;
     }
 
     .sidebar.active {
