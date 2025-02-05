@@ -108,6 +108,8 @@ main {
     font-weight: bold;
     border-color: var(--header-green);
     background-color: rgba(85, 107, 47, 0.1);
+    padding-left: 1.2rem;  /* Add more left padding for indentation */
+    border-left: 3px solid var(--header-green);  /* Add vertical line */
 }
 
 /* Content Styles */
