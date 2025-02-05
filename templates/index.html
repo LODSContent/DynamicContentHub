@@ -22,28 +22,7 @@
 
         <nav class="sidebar">
             <h2>Blog Articles</h2>
-
-            {% set categories = {} %}
-            {% for post in posts %}
-                {% if post.category not in categories %}
-                    {% set _ = categories.update({post.category: []}) %}
-                {% endif %}
-                {% set _ = categories[post.category].append(post) %}
-            {% endfor %}
-
-            {% for category, category_posts in categories.items() %}
-            <div class="category">
-                <h3 class="category-header">
-                    <i class="fas fa-chevron-down"></i>
-                    {{ category }}
-                </h3>
-                <ul class="category-items">
-                    {% for post in category_posts %}
-                    <li><a href="#" data-post-id="{{ post.id }}">{{ post.title }} <i class="fas fa-arrow-right"></i></a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endfor %}
+            <!-- Categories will be dynamically populated by JavaScript -->
         </nav>
 
         <article class="content">
@@ -54,20 +33,7 @@
             </div>
 
             <div class="blog-post">
-                <h2>{{ posts[-1].title }}</h2>
-
-                <div class="post-meta">
-                    <p><strong>Date:</strong> {{ posts[-1].date }}</p>
-                    <p><strong>Start:</strong> {{ posts[-1].start }}</p>
-                    <p><strong>End:</strong> {{ posts[-1].end }}</p>
-                </div>
-
-                <div class="post-content">
-                    {% for paragraph in posts[-1].content %}
-                    <p>{{ paragraph }}</p>
-                    {% endfor %}
-                    <img src="{{ posts[-1].image }}" alt="Image for {{ posts[-1].title }}" />
-                </div>
+                <!-- Blog content will be dynamically populated by JavaScript -->
             </div>
         </article>
     </main>
@@ -76,10 +42,6 @@
         <p>2020-2024 Ran Mor Systems, Inc</p>
     </footer>
 
-    <script>
-        // Make posts data available to JavaScript
-        const posts = {{ posts|tojson|safe }};
-    </script>
     <script src="/js/main.js"></script>
 </body>
 </html>

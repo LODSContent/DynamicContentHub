@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // posts is already defined in the template
-    let currentPostId = posts[posts.length - 1].id; // Start with the latest post
+    let posts = [];  // Initialize empty posts array
+    let currentPostId = null;
 
     // Sidebar toggle functionality
     const sidebarToggle = document.getElementById('sidebarToggle');
@@ -38,9 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateSidebar(newPosts) {
         const categoriesContainer = document.querySelector('.sidebar');
-        const titleElement = categoriesContainer.querySelector('h2');
+        const titleElement = document.createElement('h2');
+        titleElement.textContent = 'Blog Articles';
         categoriesContainer.innerHTML = ''; // Clear current content
-        categoriesContainer.appendChild(titleElement); // Restore the title
+        categoriesContainer.appendChild(titleElement);
 
         // Group posts by category
         const categories = {};
@@ -103,89 +104,25 @@ document.addEventListener('DOMContentLoaded', function() {
         attachPostLinkHandlers();
     }
 
-    // Attach initial handlers
-    attachPostLinkHandlers();
-
-    // Function to check for updates
-    async function checkForUpdates() {
-        try {
-            const response = await fetch('/api/posts');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const newPosts = await response.json();
-
-            // Check if number of posts has changed
-            if (newPosts.length !== posts.length) {
-                console.log('New posts detected, updating sidebar...');
-                posts = newPosts; // Update the global posts variable
-                updateSidebar(newPosts);
-                return;
-            }
-
-            // Check if any post content has changed
-            const hasChanges = newPosts.some((newPost, index) => {
-                return JSON.stringify(newPost) !== JSON.stringify(posts[index]);
-            });
-
-            if (hasChanges) {
-                console.log('Post changes detected, updating sidebar...');
-                posts = newPosts;
-                updateSidebar(newPosts);
-            }
-        } catch (error) {
-            console.error('Error checking for updates:', error);
-        }
-    }
-
-    // Start periodic updates
-    setInterval(checkForUpdates, 5000); // Check every 5 seconds
-
-    // Navigation buttons functionality
-    const navButtons = document.querySelectorAll('.nav-button');
-    navButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            if (button.textContent === 'Previous Blog') {
-                navigatePost('prev');
-            } else if (button.textContent === 'Next Blog') {
-                navigatePost('next');
-            } else if (button.textContent === 'Show Latest Blog') {
-                displayPost(posts[posts.length - 1].id);
-            }
-        });
-    });
-
-    function navigatePost(direction) {
-        const currentIndex = posts.findIndex(post => post.id === currentPostId);
-        let newIndex;
-
-        if (direction === 'next') {
-            newIndex = currentIndex + 1 >= posts.length ? 0 : currentIndex + 1;
-        } else {
-            newIndex = currentIndex - 1 < 0 ? posts.length - 1 : currentIndex - 1;
-        }
-
-        displayPost(posts[newIndex].id);
-    }
-
     function displayPost(postId) {
         const post = posts.find(p => p.id === postId);
         if (!post) return;
 
         currentPostId = postId;
+        const blogPost = document.querySelector('.blog-post');
 
-        // Update blog content
-        document.querySelector('.blog-post h2').textContent = post.title;
-        document.querySelector('.post-meta').innerHTML = `
-            <p><strong>Date:</strong> ${post.date}</p>
-            <p><strong>Start:</strong> ${post.start}</p>
-            <p><strong>End:</strong> ${post.end}</p>
+        blogPost.innerHTML = `
+            <h2>${post.title}</h2>
+            <div class="post-meta">
+                <p><strong>Date:</strong> ${post.date}</p>
+                <p><strong>Start:</strong> ${post.start}</p>
+                <p><strong>End:</strong> ${post.end}</p>
+            </div>
+            <div class="post-content">
+                ${post.content.map(paragraph => `<p>${paragraph}</p>`).join('')}
+                <img src="${post.image}" alt="Image for ${post.title}" />
+            </div>
         `;
-
-        // Update post content
-        const contentHtml = post.content.map(paragraph => `<p>${paragraph}</p>`).join('');
-        const imageHtml = `<img src="${post.image}" alt="Image for ${post.title}" />`;
-        document.querySelector('.post-content').innerHTML = contentHtml + imageHtml;
 
         // Update active state in sidebar
         document.querySelectorAll('.category-items a').forEach(link => {
@@ -196,4 +133,53 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Function to fetch and update posts
+    async function fetchAndUpdatePosts() {
+        try {
+            const response = await fetch('/api/posts');
+            if (!response.ok) {
+                throw new Error('Failed to fetch posts');
+            }
+            const newPosts = await response.json();
+
+            // Check if there are any changes
+            if (JSON.stringify(newPosts) !== JSON.stringify(posts)) {
+                console.log('Posts updated, refreshing display...');
+                posts = newPosts;
+                updateSidebar(posts);
+
+                // If no post is currently displayed or it's the first load, show the latest post
+                if (!currentPostId && posts.length > 0) {
+                    displayPost(posts[posts.length - 1].id);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+        }
+    }
+
+    // Navigation buttons functionality
+    const navButtons = document.querySelectorAll('.nav-button');
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (!posts.length) return;
+
+            if (button.textContent === 'Previous Blog') {
+                const currentIndex = posts.findIndex(post => post.id === currentPostId);
+                const newIndex = currentIndex > 0 ? currentIndex - 1 : posts.length - 1;
+                displayPost(posts[newIndex].id);
+            } else if (button.textContent === 'Next Blog') {
+                const currentIndex = posts.findIndex(post => post.id === currentPostId);
+                const newIndex = currentIndex < posts.length - 1 ? currentIndex + 1 : 0;
+                displayPost(posts[newIndex].id);
+            } else if (button.textContent === 'Show Latest Blog') {
+                displayPost(posts[posts.length - 1].id);
+            }
+        });
+    });
+
+    // Initial fetch and periodic updates
+    fetchAndUpdatePosts();
+    setInterval(fetchAndUpdatePosts, 5000);
 });

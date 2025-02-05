@@ -14,8 +14,7 @@ def save_blog_data(data):
 
 @app.route('/')
 def root():
-    blog_data = load_blog_data()
-    return render_template('index.html', posts=blog_data['posts'])
+    return render_template('index.html')
 
 @app.route('/api/posts', methods=['GET', 'POST'])
 def posts():
