@@ -73,6 +73,17 @@ main {
     left: calc(-1 * var(--sidebar-width)); /* Hide to the left */
 }
 
+.sidebar h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Category Styles */
+.category {
+    margin-bottom: 1rem;
+    width: 100%;  /* Make container full width */
+}
+
 /* Sidebar Toggle Button */
 .sidebar-toggle {
     position: fixed;
@@ -98,15 +109,6 @@ main {
     background-color: #e5e5e5; /* Slightly darker on hover */
 }
 
-.sidebar h2 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.category {
-    margin-bottom: 1rem;
-    width: 100%;  /* Make container full width */
-}
 
 .category-header {
     cursor: pointer;
