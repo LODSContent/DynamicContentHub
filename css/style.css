@@ -121,14 +121,14 @@ main {
     color: white;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    width: 100%;  /* Make it full width */
-    margin: 0;  /* Remove any margin */
-    margin-left: -1rem;  /* Extend to left edge */
-    margin-right: -1rem;  /* Extend to right edge */
-    padding-left: 1rem;  /* Restore padding for text */
-    padding-right: 1rem;  /* Restore padding for text */
-    width: calc(100% + 2rem);  /* Compensate for sidebar padding */
+    gap: 0.8rem;  /* Increased gap between chevron and text */
+    width: 100%;
+    margin: 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: calc(100% + 2rem);
 }
 
 /* For the category items container, set a consistent width */
