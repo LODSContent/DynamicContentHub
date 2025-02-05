@@ -59,13 +59,13 @@ main {
     border-right: 1px solid #ddd;
     height: calc(100vh - var(--header-height));
     overflow-y: auto;
-    left: -100%;
+    left: 0; /* Default to visible */
     transition: left 0.3s ease;
     z-index: 99;
 }
 
 .sidebar.active {
-    left: 0;
+    left: calc(-1 * var(--sidebar-width)); /* Hide to the left */
 }
 
 /* Sidebar Toggle Button */
@@ -81,7 +81,12 @@ main {
     border-radius: 4px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: block; /* Always show the toggle button */
+    display: block;
+    transition: left 0.3s ease;
+}
+
+.sidebar-toggle.active {
+    left: 1rem; /* Keep toggle button accessible */
 }
 
 .sidebar h2 {
@@ -147,9 +152,13 @@ main {
 .content {
     flex: 1;
     padding: 2rem;
-    padding-left: calc(2rem + 40px); /* Add space for the toggle button */
+    padding-left: calc(var(--sidebar-width) + 2rem); /* Default space for sidebar */
     overflow-y: auto;
     transition: padding-left 0.3s ease;
+}
+
+.content.active {
+    padding-left: calc(2rem + 40px); /* Reduced padding when sidebar is hidden */
 }
 
 .blog-navigation {
