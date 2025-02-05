@@ -67,6 +67,7 @@ main {
 
 .category {
     margin-bottom: 1rem;
+    width: 100%;  /* Make container full width */
 }
 
 .category-header {
@@ -77,6 +78,8 @@ main {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    width: 100%;  /* Make it full width */
+    margin: 0;  /* Remove any margin */
 }
 
 /* For the category items container, set a consistent width */
