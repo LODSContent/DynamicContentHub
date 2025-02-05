@@ -3,11 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.querySelector('.sidebar');
     const content = document.querySelector('.content');
+    const blogNav = document.querySelector('.blog-navigation');
 
     sidebarToggle.addEventListener('click', () => {
         sidebar.classList.toggle('active');
         content.classList.toggle('active');
         sidebarToggle.classList.toggle('active');
+        blogNav.classList.toggle('active');
     });
 
     // Category expansion

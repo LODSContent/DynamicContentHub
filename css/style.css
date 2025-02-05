@@ -20,6 +20,10 @@ body {
 
 /* Header Styles */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     background-color: var(--header-green);
     color: white;
     padding: 1rem;
@@ -27,6 +31,7 @@ header {
     align-items: center;
     height: var(--header-height);
     justify-content: center;  /* Center the header content */
+    z-index: 1000;
 }
 
 .logo {
@@ -155,6 +160,7 @@ main {
 /* Content Styles */
 .content {
     flex: 1;
+    margin-top: calc(var(--header-height) + 60px); /* Account for fixed header and nav */
     padding: 2rem;
     padding-left: calc(var(--sidebar-width) + 2rem); /* Default space for sidebar */
     overflow-y: auto;
@@ -165,10 +171,23 @@ main {
     padding-left: calc(2rem + 40px); /* Reduced padding when sidebar is hidden */
 }
 
+/* Blog Navigation Styles */
 .blog-navigation {
+    position: fixed;
+    top: var(--header-height);
+    left: var(--sidebar-width);
+    right: 0;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    padding: 1rem 2rem;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    z-index: 99;
+    transition: left 0.3s ease;
+}
+
+.blog-navigation.active {
+    left: 0;
 }
 
 /* Update nav button styles */
