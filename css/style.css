@@ -26,14 +26,21 @@ header {
     display: flex;
     align-items: center;
     height: var(--header-height);
+    justify-content: center;  /* Center the header content */
 }
 
 .logo {
-    margin-right: 1rem;
+    position: absolute;  /* Take logo out of centering flow */
+    left: 1rem;
 }
 
 .logo img {
     height: 30px;
+}
+
+header h1 {
+    font-weight: 300;  /* Lighter font weight */
+    margin: 0;  /* Remove default margins to ensure proper centering */
 }
 
 /* Main Layout */
@@ -77,16 +84,30 @@ main {
     padding: 0.5rem 1rem;
 }
 
+.category-items li {
+    margin-bottom: 0.5rem;
+}
+
 .category-items a {
     color: #333;
     text-decoration: none;
     display: block;
-    padding: 0.3rem 0;
+    padding: 0.8rem;
+    border: 1px solid #ddd;  /* Add border around blog titles */
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.category-items a:hover {
+    background-color: #f0f0f0;
+    border-color: var(--header-green);
 }
 
 .category-items a.active {
     color: var(--header-green);
     font-weight: bold;
+    border-color: var(--header-green);
+    background-color: rgba(85, 107, 47, 0.1);
 }
 
 /* Content Styles */
