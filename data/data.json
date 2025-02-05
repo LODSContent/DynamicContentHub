@@ -119,6 +119,19 @@
         "This post should appear automatically"
       ],
       "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a"
+    },
+    {
+      "id": 10,
+      "title": "Post Title",
+      "category": "Hiking",
+      "date": "2025-02-05",
+      "start": "optional start time",
+      "end": "optional end time",
+      "content": [
+        "paragrfgagasdfasdf asdfalsdkfsadfk asdfjkl fsaldf sfaph1",
+        "paragraph2"
+      ],
+      "image": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msKEy.img"
     }
   ]
 }
