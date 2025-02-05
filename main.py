@@ -17,8 +17,12 @@ def root():
     blog_data = load_blog_data()
     return render_template('index.html', posts=blog_data['posts'])
 
-@app.route('/api/posts', methods=['POST'])
-def add_post():
+@app.route('/api/posts', methods=['GET', 'POST'])
+def posts():
+    if request.method == 'GET':
+        blog_data = load_blog_data()
+        return jsonify(blog_data['posts'])
+
     if not request.is_json:
         return jsonify({"error": "Content-Type must be application/json"}), 400
 

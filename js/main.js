@@ -17,18 +17,103 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Category expansion
-    const categoryHeaders = document.querySelectorAll('.category-header');
-    categoryHeaders.forEach(header => {
-        const items = header.nextElementSibling;
-        const chevron = header.querySelector('.fa-chevron-down');
+    // Track expanded categories
+    const expandedCategories = new Set();
 
-        header.addEventListener('click', () => {
-            const isHidden = items.style.display === 'none';
-            items.style.display = isHidden ? 'block' : 'none';
-            chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
+    function updateSidebar(newPosts) {
+        const categoriesContainer = document.querySelector('.sidebar');
+        const titleElement = categoriesContainer.querySelector('h2');
+        categoriesContainer.innerHTML = ''; // Clear current content
+        categoriesContainer.appendChild(titleElement); // Restore the title
+
+        // Group posts by category
+        const categories = {};
+        newPosts.forEach(post => {
+            if (!categories[post.category]) {
+                categories[post.category] = [];
+            }
+            categories[post.category].push(post);
         });
-    });
+
+        // Create category elements
+        Object.entries(categories).forEach(([category, categoryPosts]) => {
+            const categoryDiv = document.createElement('div');
+            categoryDiv.className = 'category';
+
+            const header = document.createElement('h3');
+            header.className = 'category-header';
+            header.innerHTML = `
+                <i class="fas fa-chevron-down"></i>
+                ${category}
+            `;
+
+            const itemsList = document.createElement('ul');
+            itemsList.className = 'category-items';
+
+            // Set initial display based on previous state
+            itemsList.style.display = expandedCategories.has(category) ? 'block' : 'none';
+            if (itemsList.style.display === 'none') {
+                header.querySelector('i').style.transform = 'rotate(-90deg)';
+            }
+
+            categoryPosts.forEach(post => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<a href="#" data-post-id="${post.id}">${post.title} <i class="fas fa-arrow-right"></i></a>`;
+                itemsList.appendChild(listItem);
+            });
+
+            // Add click handler for category expansion
+            header.addEventListener('click', () => {
+                const items = header.nextElementSibling;
+                const chevron = header.querySelector('.fa-chevron-down');
+                const isHidden = items.style.display === 'none';
+
+                items.style.display = isHidden ? 'block' : 'none';
+                chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
+
+                if (isHidden) {
+                    expandedCategories.add(category);
+                } else {
+                    expandedCategories.delete(category);
+                }
+            });
+
+            categoryDiv.appendChild(header);
+            categoryDiv.appendChild(itemsList);
+            categoriesContainer.appendChild(categoryDiv);
+        });
+
+        // Reattach click handlers for post links
+        document.querySelectorAll('.category-items a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const postId = parseInt(link.dataset.postId);
+                if (postId) {
+                    displayPost(postId);
+                    document.querySelectorAll('.category-items a').forEach(a => {
+                        a.classList.remove('active');
+                    });
+                    link.classList.add('active');
+                }
+            });
+        });
+    }
+
+    // Periodically check for updates
+    setInterval(async () => {
+        try {
+            const response = await fetch('/api/posts');
+            const newPosts = await response.json();
+
+            // Check if there are any changes
+            if (JSON.stringify(posts) !== JSON.stringify(newPosts)) {
+                posts = newPosts; // Update the global posts variable
+                updateSidebar(newPosts);
+            }
+        } catch (error) {
+            console.error('Error checking for updates:', error);
+        }
+    }, 30000); // Check every 30 seconds
 
     // Navigation buttons functionality
     const navButtons = document.querySelectorAll('.nav-button');
@@ -40,22 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 navigatePost('next');
             } else if (button.textContent === 'Show Latest Blog') {
                 displayPost(posts[posts.length - 1].id);
-            }
-        });
-    });
-
-    // Setup sidebar links
-    document.querySelectorAll('.category-items a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const postId = parseInt(link.dataset.postId);
-            if (postId) {
-                displayPost(postId);
-                // Update active state
-                document.querySelectorAll('.category-items a').forEach(a => {
-                    a.classList.remove('active');
-                });
-                link.classList.add('active');
             }
         });
     });
@@ -94,8 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update active state in sidebar
         document.querySelectorAll('.category-items a').forEach(link => {
-            const linkPostId = parseInt(link.dataset.postId);
-            if (linkPostId === postId) {
+            if (parseInt(link.dataset.postId) === postId) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
