@@ -80,6 +80,11 @@ main {
     gap: 0.5rem;
     width: 100%;  /* Make it full width */
     margin: 0;  /* Remove any margin */
+    margin-left: -1rem;  /* Extend to left edge */
+    margin-right: -1rem;  /* Extend to right edge */
+    padding-left: 1rem;  /* Restore padding for text */
+    padding-right: 1rem;  /* Restore padding for text */
+    width: calc(100% + 2rem);  /* Compensate for sidebar padding */
 }
 
 /* For the category items container, set a consistent width */
