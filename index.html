@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/logo.svg" alt="Ran Mor">
+        </div>
+        <h1>My Blog</h1>
+    </header>
+
+    <main>
+        <button id="sidebarToggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="sidebar">
+            <h2>Blog Articles</h2>
+            
+            <div class="category">
+                <h3 class="category-header">
+                    <i class="fas fa-camera"></i>
+                    Photography
+                    <i class="fas fa-chevron-down"></i>
+                </h3>
+                <ul class="category-items">
+                    <li><a href="#">How to capture the sunset</a></li>
+                </ul>
+            </div>
+
+            <div class="category">
+                <h3 class="category-header">
+                    <i class="fas fa-hiking"></i>
+                    Hiking
+                    <i class="fas fa-chevron-down"></i>
+                </h3>
+                <ul class="category-items">
+                    <li><a href="#">The Florida trail</a></li>
+                    <li><a href="#" class="active">The Foothills Trail</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <article class="content">
+            <div class="blog-navigation">
+                <button class="nav-button">Next Blog</button>
+                <button class="nav-button">Show Latest Blog</button>
+                <button class="nav-button">Next Blog</button>
+            </div>
+
+            <div class="blog-post">
+                <h2>The Foothills trail</h2>
+                
+                <div class="post-meta">
+                    <p><strong>Date:</strong> 01/01/1999</p>
+                    <p><strong>Start:</strong> tomorrow</p>
+                    <p><strong>End:</strong> today</p>
+                </div>
+
+                <div class="post-content">
+                    <p>Hi There,</p>
+                    
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.</p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>2020-2024 Ran Mor Systems, Inc</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
