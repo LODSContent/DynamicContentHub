@@ -94,7 +94,6 @@ main {
     text-decoration: none;
     display: block;
     padding: 0.8rem;
-    border: 1px solid #ddd;
     border-radius: 4px;
     transition: all 0.2s ease;
     background-color: white;  /* Explicitly set white background */
@@ -102,14 +101,13 @@ main {
 
 .category-items a:hover {
     background-color: #f0f0f0;
-    border-color: var(--header-green);
 }
 
 .category-items a.active {
     color: var(--header-green);
     font-weight: bold;
-    border-color: var(--header-green);
     padding-left: 1.2rem;  /* Keep the indentation */
+    border-left: 3px solid var(--header-green);  /* Add vertical line */
 }
 
 
