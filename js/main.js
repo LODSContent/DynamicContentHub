@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.category-items a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const postTitle = link.textContent.trim().replace(' →', '');
-                const post = posts.find(p => p.title === postTitle);
+                const postTitle = link.textContent.trim().replace(' →', '').replace(/\s*[→➜]\s*$/, '').replace(/\s+$/, '');
+                const post = posts.find(p => p.title.toLowerCase() === postTitle.toLowerCase());
                 if (post) {
                     displayPost(post.id);
                     document.querySelectorAll('.category-items a').forEach(a => {
@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update active state in sidebar
         document.querySelectorAll('.category-items a').forEach(link => {
-            if (link.textContent.trim().replace(' →', '') === post.title) {
+            const linkText = link.textContent.trim().replace(/\s*[→➜]\s*$/, '').replace(/\s+$/, '');
+            if (linkText.toLowerCase() === post.title.toLowerCase()) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
