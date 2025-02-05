@@ -106,6 +106,19 @@
         "This post should appear automatically"
       ],
       "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a"
+    },
+    {
+      "id": 9,
+      "title": "API Test Post 42",
+      "category": "Hiking",
+      "date": "2025-02-05",
+      "start": "N/A",
+      "end": "N/A",
+      "content": [
+        "Testing the dynamic sidebar update",
+        "This post should appear automatically"
+      ],
+      "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a"
     }
   ]
 }

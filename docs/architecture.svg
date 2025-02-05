@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#f8f9fa"/>
+    
+    <!-- Title -->
+    <text x="400" y="50" text-anchor="middle" font-family="Arial" font-size="24" fill="#333">
+        Blog Application Architecture
+    </text>
+
+    <!-- Client Layer -->
+    <rect x="50" y="100" width="200" height="160" rx="10" fill="#e3f2fd" stroke="#1976d2"/>
+    <text x="150" y="130" text-anchor="middle" font-family="Arial" font-size="16" fill="#1976d2">Client Layer</text>
+    
+    <rect x="70" y="150" width="160" height="30" rx="5" fill="#bbdefb"/>
+    <text x="150" y="170" text-anchor="middle" font-family="Arial" font-size="12">Dynamic UI (JavaScript)</text>
+    
+    <rect x="70" y="190" width="160" height="30" rx="5" fill="#bbdefb"/>
+    <text x="150" y="210" text-anchor="middle" font-family="Arial" font-size="12">Real-time Updates</text>
+
+    <!-- Server Layer -->
+    <rect x="300" y="100" width="200" height="160" rx="10" fill="#e8f5e9" stroke="#388e3c"/>
+    <text x="400" y="130" text-anchor="middle" font-family="Arial" font-size="16" fill="#388e3c">Server Layer</text>
+    
+    <rect x="320" y="150" width="160" height="30" rx="5" fill="#c8e6c9"/>
+    <text x="400" y="170" text-anchor="middle" font-family="Arial" font-size="12">Flask Application</text>
+    
+    <rect x="320" y="190" width="160" height="30" rx="5" fill="#c8e6c9"/>
+    <text x="400" y="210" text-anchor="middle" font-family="Arial" font-size="12">RESTful API</text>
+
+    <!-- Data Layer -->
+    <rect x="550" y="100" width="200" height="160" rx="10" fill="#fff3e0" stroke="#f57c00"/>
+    <text x="650" y="130" text-anchor="middle" font-family="Arial" font-size="16" fill="#f57c00">Data Layer</text>
+    
+    <rect x="570" y="150" width="160" height="30" rx="5" fill="#ffe0b2"/>
+    <text x="650" y="170" text-anchor="middle" font-family="Arial" font-size="12">JSON Storage</text>
+    
+    <rect x="570" y="190" width="160" height="30" rx="5" fill="#ffe0b2"/>
+    <text x="650" y="210" text-anchor="middle" font-family="Arial" font-size="12">Post Management</text>
+
+    <!-- Arrows -->
+    <!-- Client to Server -->
+    <path d="M 250 180 L 300 180" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+    <!-- Server to Data -->
+    <path d="M 500 180 L 550 180" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Arrow Marker -->
+    <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+            <path d="M0,0 L10,5 L0,10 L2,5 Z" fill="#666"/>
+        </marker>
+    </defs>
+
+    <!-- Data Flow -->
+    <text x="400" y="300" text-anchor="middle" font-family="Arial" font-size="14" fill="#666">
+        HTTP/JSON Data Flow
+    </text>
+
+    <!-- Technologies List -->
+    <text x="400" y="350" text-anchor="middle" font-family="Arial" font-size="18" fill="#333">
+        Technologies Used
+    </text>
+    
+    <text x="400" y="380" text-anchor="middle" font-family="Arial" font-size="14" fill="#666">
+        Frontend: HTML5, CSS3, JavaScript
+    </text>
+    <text x="400" y="400" text-anchor="middle" font-family="Arial" font-size="14" fill="#666">
+        Backend: Flask, Python
+    </text>
+    <text x="400" y="420" text-anchor="middle" font-family="Arial" font-size="14" fill="#666">
+        Server: Gunicorn
+    </text>
+    <text x="400" y="440" text-anchor="middle" font-family="Arial" font-size="14" fill="#666">
+        Storage: JSON File System
+    </text>
+</svg>
