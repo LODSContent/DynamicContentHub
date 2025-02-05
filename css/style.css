@@ -90,7 +90,7 @@ main {
 /* For the category items container, set a consistent width */
 .category-items {
     list-style: none;
-    padding: 0.5rem;  /* Reduced padding to allow for wider boxes */
+    padding: 0.25rem;  /* Reduced padding to allow for wider boxes */
 }
 
 .category-items li {
