@@ -20,6 +20,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Track expanded categories
     const expandedCategories = new Set();
 
+    function attachPostLinkHandlers() {
+        document.querySelectorAll('.category-items a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const postId = parseInt(link.dataset.postId);
+                if (postId) {
+                    displayPost(postId);
+                    document.querySelectorAll('.category-items a').forEach(a => {
+                        a.classList.remove('active');
+                    });
+                    link.classList.add('active');
+                }
+            });
+        });
+    }
+
     function updateSidebar(newPosts) {
         const categoriesContainer = document.querySelector('.sidebar');
         const titleElement = categoriesContainer.querySelector('h2');
@@ -83,21 +99,12 @@ document.addEventListener('DOMContentLoaded', function() {
             categoriesContainer.appendChild(categoryDiv);
         });
 
-        // Reattach click handlers for post links
-        document.querySelectorAll('.category-items a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const postId = parseInt(link.dataset.postId);
-                if (postId) {
-                    displayPost(postId);
-                    document.querySelectorAll('.category-items a').forEach(a => {
-                        a.classList.remove('active');
-                    });
-                    link.classList.add('active');
-                }
-            });
-        });
+        // Attach click handlers for all post links
+        attachPostLinkHandlers();
     }
+
+    // Attach initial handlers
+    attachPostLinkHandlers();
 
     // Periodically check for updates
     setInterval(async () => {
