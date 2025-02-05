@@ -67,6 +67,7 @@ main {
     left: 0; /* Default to visible */
     transition: left 0.3s ease;
     z-index: 99;
+    margin-top: var(--header-height); /* Add margin to account for fixed header */
 }
 
 .sidebar.active {
@@ -76,6 +77,9 @@ main {
 .sidebar h2 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
+    color: #333;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
 }
 
 /* Category Styles */
@@ -157,7 +161,6 @@ main {
     padding-left: 1.2rem;  /* Keep the indentation */
     border-left: 3px solid var(--header-green);  /* Add vertical line */
 }
-
 
 /* Content Styles */
 .content {
