@@ -144,15 +144,25 @@ main {
 .category-items a {
     color: #333;
     text-decoration: none;
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0.8rem;
     border-radius: 4px;
     transition: all 0.2s ease;
-    background-color: white;  /* Explicitly set white background */
+    background-color: white;
 }
 
-.category-items a:hover {
-    background-color: #f0f0f0;
+.category-items a i.fa-arrow-right {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-left: 0.5rem;
+}
+
+.category-items a:hover i.fa-arrow-right {
+    opacity: 1;
+    transform: translateX(2px);
+    transition: all 0.2s ease;
 }
 
 .category-items a.active {
@@ -217,7 +227,7 @@ main {
     font-size: 2rem;
     font-weight: 300;  /* Lighter font weight */
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--header-green);  /* Underline */
+    border-bottom: 1px solid var(--header-green);  /* Changed from 2px to 1px */
 }
 
 .post-meta {
