@@ -132,12 +132,19 @@ main {
     margin-bottom: 2rem;
 }
 
+/* Update nav button styles */
 .nav-button {
     padding: 0.5rem 1rem;
-    background-color: var(--header-green);
-    color: white;
+    background-color: transparent;
+    color: #333;  /* Dark gray color */
     border: none;
     cursor: pointer;
+    font-weight: 500;  /* Slightly bold */
+    transition: color 0.2s ease;
+}
+
+.nav-button:hover {
+    color: var(--header-green);  /* Change color on hover */
 }
 
 .blog-post h2 {
