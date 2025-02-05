@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let posts = []; //This line is crucial, it needs to be here to receive the data.
-    //The following line should be updated to use the data provided by the server.  I am assuming this variable is populated elsewhere.
+    // posts is already defined in the template
     let currentPostId = posts[posts.length - 1].id; // Start with the latest post
 
     // Sidebar toggle functionality
@@ -9,31 +8,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const content = document.querySelector('.content');
     const blogNav = document.querySelector('.blog-navigation');
 
-    sidebarToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        content.classList.toggle('active');
-        sidebarToggle.classList.toggle('active');
-        blogNav.classList.toggle('active');
-    });
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            content.classList.toggle('active');
+            sidebarToggle.classList.toggle('active');
+            blogNav.classList.toggle('active');
+        });
+    }
 
     // Category expansion
     const categoryHeaders = document.querySelectorAll('.category-header');
     categoryHeaders.forEach(header => {
+        const items = header.nextElementSibling;
+        const chevron = header.querySelector('.fa-chevron-down');
+
         header.addEventListener('click', () => {
-            const items = header.nextElementSibling;
-            const chevron = header.querySelector('.fa-chevron-down');
-            if (items.style.display === 'none') {
-                items.style.display = 'block';
-                chevron.style.transform = 'rotate(0deg)';
-            } else {
-                items.style.display = 'none';
-                chevron.style.transform = 'rotate(-90deg)';
-            }
+            const isHidden = items.style.display === 'none';
+            items.style.display = isHidden ? 'block' : 'none';
+            chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
         });
     });
 
     // Navigation buttons functionality
-    document.querySelectorAll('.nav-button').forEach(button => {
+    const navButtons = document.querySelectorAll('.nav-button');
+    navButtons.forEach(button => {
         button.addEventListener('click', () => {
             if (button.textContent === 'Previous Blog') {
                 navigatePost('prev');
@@ -52,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const postId = parseInt(link.dataset.postId);
             if (postId) {
                 displayPost(postId);
+                // Update active state
                 document.querySelectorAll('.category-items a').forEach(a => {
                     a.classList.remove('active');
                 });
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update active state in sidebar
         document.querySelectorAll('.category-items a').forEach(link => {
             const linkPostId = parseInt(link.dataset.postId);
-            if (linkPostId === post.id) {
+            if (linkPostId === postId) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
