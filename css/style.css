@@ -244,6 +244,10 @@ footer {
     color: white;
     text-align: center;
     padding: 1rem;
+    position: relative;  /* Change to relative to break out of the flex layout */
+    width: 100%;        /* Ensure full width */
+    left: 0;           /* Align to the left edge */
+    margin-left: 0;    /* Remove any margin */
 }
 
 /* Media query only for very small screens */
