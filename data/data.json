@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "How to capture the sunset",
-      "category": "Photography",
+      "category": "Documents",
       "date": "2024-01-15",
       "start": "6:00 PM",
       "end": "7:30 PM",
@@ -41,97 +41,6 @@
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
       ],
       "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e"
-    },
-    {
-      "id": 4,
-      "title": "test",
-      "category": "Hiking",
-      "date": "2025-02-05",
-      "start": "Change",
-      "end": "Change",
-      "content": [
-        "asdflads jflsadfkjadslkjf",
-        "asdflasdflkjflasdf"
-      ],
-      "image": "https://"
-    },
-    {
-      "id": 5,
-      "title": "Test API Post",
-      "category": "Testing",
-      "date": "2025-02-05",
-      "start": "N/A",
-      "end": "N/A",
-      "content": [
-        "This is a test post",
-        "Created via API"
-      ],
-      "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1"
-    },
-    {
-      "id": 6,
-      "title": "API Test Post 2",
-      "category": "Hiking",
-      "date": "2025-02-05",
-      "start": "N/A",
-      "end": "N/A",
-      "content": [
-        "Testing the dynamic sidebar update",
-        "This post should appear automatically"
-      ],
-      "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a"
-    },
-    {
-      "id": 7,
-      "title": "API Test Post 3",
-      "category": "Hiking",
-      "date": "2025-02-05",
-      "start": "N/A",
-      "end": "N/A",
-      "content": [
-        "Testing the dynamic sidebar update",
-        "This post should appear automatically"
-      ],
-      "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a"
-    },
-    {
-      "id": 8,
-      "title": "API Test Post 4",
-      "category": "Hiking",
-      "date": "2025-02-05",
-      "start": "N/A",
-      "end": "N/A",
-      "content": [
-        "Testing the dynamic sidebar update",
-        "This post should appear automatically"
-      ],
-      "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a"
-    },
-    {
-      "id": 9,
-      "title": "API Test Post 42",
-      "category": "Hiking",
-      "date": "2025-02-05",
-      "start": "N/A",
-      "end": "N/A",
-      "content": [
-        "Testing the dynamic sidebar update",
-        "This post should appear automatically"
-      ],
-      "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a"
-    },
-    {
-      "id": 10,
-      "title": "Post Title",
-      "category": "Hiking",
-      "date": "2025-02-05",
-      "start": "optional start time",
-      "end": "optional end time",
-      "content": [
-        "paragrfgagasdfasdf asdfalsdkfsadfk asdfjkl fsaldf sfaph1",
-        "paragraph2"
-      ],
-      "image": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msKEy.img"
     }
   ]
 }

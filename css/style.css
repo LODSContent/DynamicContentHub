@@ -15,6 +15,7 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
+    background-color: white;
     flex-direction: column;
 }
 
@@ -226,6 +227,7 @@ main {
     margin-bottom: 1rem;
     font-size: 2rem;
     font-weight: 300;  /* Lighter font weight */
+    background-color: white;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--header-green);  /* Changed from 2px to 1px */
 }

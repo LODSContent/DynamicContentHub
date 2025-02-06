@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const itemsList = document.createElement('ul');
             itemsList.className = 'category-items';
 
-            // Set initial display based on previous state
-            itemsList.style.display = expandedCategories.has(category) ? 'block' : 'none';
-            if (itemsList.style.display === 'none') {
-                header.querySelector('i').style.transform = 'rotate(-90deg)';
-            }
+            // // Set initial display based on previous state
+            // itemsList.style.display = expandedCategories.has(category) ? 'block' : 'none';
+            // if (itemsList.style.display === 'none') {
+            //     header.querySelector('i').style.transform = 'rotate(-90deg)';
+            // }
 
             categoryPosts.forEach(post => {
                 const listItem = document.createElement('li');
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch and update posts
     async function fetchAndUpdatePosts() {
         try {
-            const response = await fetch('/api/posts');
+            const response = await fetch('./api/posts');
             if (!response.ok) {
                 throw new Error('Failed to fetch posts');
             }
