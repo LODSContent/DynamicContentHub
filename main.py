@@ -42,9 +42,9 @@ def posts():
         'id': next_id,
         'title': data['title'],
         'category': data['category'],
-        'date': datetime.now().strftime('%Y-%m-%d'),
-        'start': data.get('start', 'N/A'),
-        'end': data.get('end', 'N/A'),
+        'to': data.get('to', 'N/A'),
+        'from': data.get('from', 'N/A'),
+        'subject': data.get('subject', 'N/A'),
         'content': data['content'] if isinstance(data['content'], list) else [data['content']],
         'image': data['image']
     }

@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateSidebar(newPosts) {
         const categoriesContainer = document.querySelector('.sidebar');
         const titleElement = document.createElement('h2');
-        titleElement.textContent = 'Blog Articles';
+        titleElement.textContent = 'Resources';
         categoriesContainer.innerHTML = ''; // Clear current content
         categoriesContainer.appendChild(titleElement);
 
@@ -114,9 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
         blogPost.innerHTML = `
             <h2>${post.title}</h2>
             <div class="post-meta">
-                <p><strong>Date:</strong> ${post.date}</p>
-                <p><strong>Start:</strong> ${post.start}</p>
-                <p><strong>End:</strong> ${post.end}</p>
+                <p><strong>To:</strong> ${post.to}</p>
+                <p><strong>From:</strong> ${post.from}</p>
+                <p><strong>Subject:</strong> ${post.subject}</p>
             </div>
             <div class="post-content">
                 ${post.content.map(paragraph => `<p>${paragraph}</p>`).join('')}
@@ -165,15 +165,15 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', () => {
             if (!posts.length) return;
 
-            if (button.textContent === 'Previous Blog') {
+            if (button.textContent === 'Previous Resource') {
                 const currentIndex = posts.findIndex(post => post.id === currentPostId);
                 const newIndex = currentIndex > 0 ? currentIndex - 1 : posts.length - 1;
                 displayPost(posts[newIndex].id);
-            } else if (button.textContent === 'Next Blog') {
+            } else if (button.textContent === 'Next Resource') {
                 const currentIndex = posts.findIndex(post => post.id === currentPostId);
                 const newIndex = currentIndex < posts.length - 1 ? currentIndex + 1 : 0;
                 displayPost(posts[newIndex].id);
-            } else if (button.textContent === 'Show Latest Blog') {
+            } else if (button.textContent === 'Show Latest Resource') {
                 displayPost(posts[posts.length - 1].id);
             }
         });

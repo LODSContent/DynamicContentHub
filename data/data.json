@@ -2,45 +2,28 @@
   "posts": [
     {
       "id": 1,
-      "title": "How to capture the sunset",
+      "title": "Functional Specifications",
       "category": "Documents",
-      "date": "2024-01-15",
-      "start": "6:00 PM",
-      "end": "7:30 PM",
       "content": [
-        "Hello photography enthusiasts!",
-        "Capturing the perfect sunset requires patience and the right technique. The golden hour, which occurs just before sunset, provides the most stunning lighting conditions for photography.",
-        "The key is to arrive at your location at least 30 minutes before sunset to set up your equipment and find the perfect composition. Remember to use a tripod for stability and experiment with different exposure settings."
+        "Hello Team!",
+        "Our weekly strategy meeting will focus on upcoming promotional campaigns and reviewing current marketing KPIs. Please come prepared with updates on your respective projects.",
+        "We will meet in the conference room at 10 AM. Let's bring some fresh ideas to the table!"
       ],
-      "image": "https://images.unsplash.com/photo-1495616811223-4d98c6e9c869"
+      "image": "https://images.unsplash.com/photo-1581276879432-15d6b61b0b05"
     },
     {
       "id": 2,
-      "title": "The Florida trail",
-      "category": "Hiking",
-      "date": "2024-01-20",
-      "start": "8:00 AM",
-      "end": "4:00 PM",
+      "title": "Application going offline",
+      "category": "Emails",
+      "to": "marketing@company.com",
+      "from": "manager@company.com",
+      "subject": "Weekly Strategy Meeting",
       "content": [
-        "Greetings fellow hikers!",
-        "The Florida Trail offers a unique perspective of Florida's diverse ecosystems. From crystal-clear springs to pine forests, this trail has it all.",
-        "This guide will help you prepare for your journey through one of Florida's most beautiful hiking trails. Remember to bring plenty of water and sun protection!"
+        "Hello Team!",
+        "Our weekly strategy meeting will focus on upcoming promotional campaigns and reviewing current marketing KPIs. Please come prepared with updates on your respective projects.",
+        "We will meet in the conference room at 10 AM. Let's bring some fresh ideas to the table!"
       ],
-      "image": "https://images.unsplash.com/photo-1551632811-561732d1e306"
-    },
-    {
-      "id": 3,
-      "title": "The Foothills trail",
-      "category": "Hiking",
-      "date": "2024-01-25",
-      "start": "tomorrow",
-      "end": "today",
-      "content": [
-        "Hi There,",
-        "The Foothills Trail is a testament to the natural beauty of the Appalachian region. This guide will take you through the essential preparations and highlights of this magnificent trail.",
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
-      ],
-      "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e"
+      "image": "https://unsplash.com/photos/person-sitting-front-of-laptop-mfB1B1s4sMc"
     }
   ]
 }
