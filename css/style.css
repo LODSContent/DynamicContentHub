@@ -1,7 +1,7 @@
 :root {
     --header-blue: #02577f;
     --color-accent: #f47529;
-    --sidebar-width: 250px;
+    --sidebar-width: 300px;
     --header-height: 60px;
 }
 
@@ -46,7 +46,8 @@ header {
 }
 
 header h1 {
-    font-weight: 300;  /* Lighter font weight */
+    font-weight: 300;
+    font-size: 1.5rem;  /* Lighter font weight */
     margin: 0;  /* Remove default margins to ensure proper centering */
 }
 
@@ -62,7 +63,7 @@ main {
     position: fixed;
     width: var(--sidebar-width);
     background-color: #e6e8e8;
-    padding: 1rem;
+    padding: .5rem;
     border-right: 1px solid #ddd;
     height: calc(100vh - var(--header-height));
     overflow-y: auto;
@@ -79,6 +80,7 @@ main {
 .sidebar h2 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
+    font-weight: 200;
     color: #333;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #ddd;
@@ -121,6 +123,7 @@ main {
     padding: 0.5rem;
     background-color: var(--header-blue);
     color: white;
+    font-weight: 200;
     display: flex;
     align-items: center;
     gap: 0.8rem;  /* Increased gap between chevron and text */
@@ -213,7 +216,7 @@ main {
 .nav-button {
     padding: 0.5rem 1rem;
     background-color: transparent;
-    color: #333;  /* Dark gray color */
+    color: #646464;  /* Dark gray color */
     border: none;
     cursor: pointer;
     font-weight: 500;  /* Slightly bold */

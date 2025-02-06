@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             categoryPosts.forEach(post => {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `<a href="#" data-post-id="${post.id}">${post.title} <i class="fas fa-arrow-right"></i></a>`;
+                listItem.innerHTML = `<a href="#" data-post-id="${post.id}">${post.title} <i class="fas fa-arrow-turn-up"></i></a>`;
                 itemsList.appendChild(listItem);
             });
 
@@ -181,5 +181,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial fetch and periodic updates
     fetchAndUpdatePosts();
-    setInterval(fetchAndUpdatePosts, 5000);
+    setInterval(fetchAndUpdatePosts, 3000);
 });
