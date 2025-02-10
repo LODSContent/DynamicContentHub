@@ -2,7 +2,7 @@ from flask import Flask, render_template, send_from_directory, request, jsonify
 import json
 from datetime import datetime
 
-app = Flask(__name__, static_url_path='', static_folder='.')
+app = Flask(__name__)
 
 def load_blog_data():
     with open('data/data.json', 'r') as f:
