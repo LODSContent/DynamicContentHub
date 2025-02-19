@@ -4,3 +4,4 @@ newdata.md
 pyproject.toml
 .venv
 Dockerfile
+.vscode
