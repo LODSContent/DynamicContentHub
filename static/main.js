@@ -113,14 +113,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         blogPost.innerHTML = `
             <h2>${post.title}</h2>
-            <div class="post-meta">
-                <p><strong>To:</strong> ${post.to}</p>
-                <p><strong>From:</strong> ${post.from}</p>
-                <p><strong>Subject:</strong> ${post.subject}</p>
-            </div>
             <div class="post-content">
-                ${post.content.map(paragraph => `<p>${paragraph}</p>`).join('')}
-                <img src="${post.image}" alt="Image for ${post.title}" />
+                ${post.content}
             </div>
         `;
 

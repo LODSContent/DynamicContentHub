@@ -1,2 +1,6 @@
 .vscode
 .venv
+*.html
+*.png
+*data.json
+__pycache__/
