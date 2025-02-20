@@ -1,4 +1,16 @@
 {
   "posts": [
+    {
+      "id": 1,
+      "title": "A Pic",
+      "category": "Documents",
+      "content": "<img src=\"./data/resources/1.1.2.png\" alt=\"Image for A Pic\" />"
+    },
+    {
+      "id": 2,
+      "title": "A Doc",
+      "category": "Documents",
+      "content": "\n\n<p><strong>Anna:</strong></p>\n<p>Travis, sorry to interrupt you while you\u2019re on those improvements at\nHQ but I need your help with a trouble ticket that just came in from\nBranch #4. They say EIGRP adjacency between r70 and r24 over the DMVPN\ntunnel keeps going up and down. Syslog on r70 is just filled with all\nkinds of logs so not sure what to focus on first. One of the things I\nnoticed is just an ongoing churn of %DUAL-5-NBRCHANGE: EIGRP-IPv4 65006\nlogs saying the EIGRP neighbor with r24 is up\u2026 and then seconds later it\nis back down again.</p>\n<p><strong>Travis:</strong></p>\n<p>Do you know if anything changed at that branch or in those configs?\nIsn\u2019t that branch the location where they were looking at maybe doing\nBGP over the DMVPN tunnel instead of EIGRP? Are any other branches\nhaving issues with EIGRP neighboring to r24 over DMVPN?</p>\n<p><strong>Anna:</strong></p>\n<p>No other branches are having issues at all. I just went into r24 and\nthis is the only EIGRP neighbor that is flapping. And yes, you are\nright, Branch #4 is the branch where they were going to try to do BGP\ninstead of EIGRP over the DMVPN. But remember, we haven\u2019t enabled r24 to\ndo BGP over the DMVPN with r70 yet, so r24 does not have a BGP session\nwith r70 anyway - I just checked it.</p>\n<p><strong>Travis:</strong></p>\n<p>Okay\u2026 let\u2019s look at their configs and draw this all out. I am sure it\nis something in r70. I think I remember us hitting something like this\nin our original deployment of the DMVPN. And let\u2019s involve our\nCCIE-in-making to help us with this, too!</p>\n"
+    }
   ]
 }
