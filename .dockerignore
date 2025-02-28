@@ -1,7 +1,6 @@
-*replit*
-newdata.md
-*data.json
-pyproject.toml
+data/resources/
+*.html
+*.png
 .venv
 Dockerfile
 .vscode

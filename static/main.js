@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
     function updateSidebar(newPosts) {
         const categoriesContainer = document.querySelector('.sidebar');
         const titleElement = document.createElement('h2');
@@ -66,12 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const itemsList = document.createElement('ul');
             itemsList.className = 'category-items';
-
-            // // Set initial display based on previous state
-            // itemsList.style.display = expandedCategories.has(category) ? 'block' : 'none';
-            // if (itemsList.style.display === 'none') {
-            //     header.querySelector('i').style.transform = 'rotate(-90deg)';
-            // }
 
             categoryPosts.forEach(post => {
                 const listItem = document.createElement('li');

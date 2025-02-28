@@ -2,5 +2,5 @@
 .venv
 *.html
 *.png
-*data.json
+data.json
 __pycache__/
