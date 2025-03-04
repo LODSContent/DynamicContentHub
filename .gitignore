@@ -4,3 +4,4 @@
 *.png
 data.json
 __pycache__/
+data/

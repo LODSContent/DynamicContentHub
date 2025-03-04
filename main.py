@@ -5,16 +5,20 @@ from utils import (
     add_post
 )
 
+
 app = Flask(__name__)
+
 
 @app.route('/')
 def root():
     return render_template('index.html')
 
+
 @app.route('/api/posts', methods=['GET'])
 def get_posts():
     resource_data = load_resource_data()
     return jsonify(resource_data['posts'])
+
 
 @app.route('/api/posts', methods=['POST'])
 def create_post():
@@ -32,6 +36,7 @@ def create_post():
     new_post = add_post(data)
 
     return jsonify({"message": "Post added successfully", "post": new_post}), 201
+
 
 @app.route('/data/<path:path>')
 def send_data(path):
