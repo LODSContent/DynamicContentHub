@@ -26,11 +26,24 @@ def save_resource_data(data: dict) -> None:
         json.dump(data, file, indent=2)
 
 
+def replace_img_src(content: str) -> str:
+    '''Function to replace the src attribute of img tags in the content.'''
+    soup = BeautifulSoup(content, 'html.parser')
+    for img_tag in soup.find_all('img'):
+        # Extract the filename from the src attribute.
+        filename = img_tag['src'].split('\\')[-1]
+        # Replace the src attribute with the new path.
+        img_tag['src'] = f'./data/resources/{filename}'
+    return str(soup)
+
+
 def handle_content(filename: str, title: str) -> str:
     '''Function to handle different type of content based on the file extension.'''
     if filename.endswith('.html'):
         # Extract the body content if it's an HTML file.
-        return extract_body(f'data/resources/{filename}')
+        body_content = extract_body(f'data/resources/{filename}')
+        # Replace img src attributes in the body content.
+        return replace_img_src(body_content)
     elif filename.endswith('.png'):
         # Return an img tag if it's an image file.
         return f'<img src="./data/resources/{filename}" alt="Image for {title}" />'
