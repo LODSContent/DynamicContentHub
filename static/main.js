@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
     function updateSidebar(newPosts) {
         const categoriesContainer = document.querySelector('.sidebar');
         const titleElement = document.createElement('h2');
@@ -70,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             categoryPosts.forEach(post => {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `<a href="#" data-post-id="${post.id}">${post.title} <i class="fas fa-arrow-turn-up"></i></a>`;
+                listItem.innerHTML = `<a href="#" data-post-id="${post.id}" class="${post.read ? '' : 'unread'}">${post.title} <i class="fas fa-arrow-turn-up"></i></a>`;
                 itemsList.appendChild(listItem);
             });
 
@@ -99,6 +98,27 @@ document.addEventListener('DOMContentLoaded', function() {
         attachPostLinkHandlers();
     }
 
+    async function markPostAsRead(postId) {
+        try {
+            const response = await fetch(`./api/posts/${postId}/read`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ read: true })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to mark post as read');
+            }
+    
+            const result = await response.json();
+            console.log('Post marked as read:', result);
+        } catch (error) {
+            console.error('Error marking post as read:', error);
+        }
+    }
+
     function displayPost(postId) {
         const post = posts.find(p => p.id === postId);
         if (!post) return;
@@ -121,6 +141,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.classList.remove('active');
             }
         });
+
+        // Mark the post as read
+        markPostAsRead(postId);
     }
 
     // Function to fetch and update posts
