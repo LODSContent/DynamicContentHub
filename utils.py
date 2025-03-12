@@ -66,6 +66,7 @@ def add_post(data: dict) -> dict:
     # Create new post.
     new_post = {
         'id': next_id,
+        'read': False,
         'title': data['title'],
         'category': data['category'],
         'content': handle_content(data['content'], data['title']),

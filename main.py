@@ -2,6 +2,7 @@ from flask import Flask, render_template, send_from_directory, request, jsonify
 from datetime import datetime
 from utils import (
     load_resource_data,
+    save_resource_data,
     add_post
 )
 
@@ -36,6 +37,25 @@ def create_post():
     new_post = add_post(data)
 
     return jsonify({"message": "Post added successfully", "post": new_post}), 201
+
+
+@app.route('/api/posts/<int:post_id>/read', methods=['PATCH'])
+def mark_post_as_read(post_id):
+    # Check JSON content type
+    if not request.is_json:
+        return jsonify({"error": "Content-Type must be application/json"}), 400
+
+    resource_data = load_resource_data()
+    post = next((post for post in resource_data['posts'] if post['id'] == post_id), None)
+
+    if post is None:
+        return jsonify({"error": "Post not found"}), 404
+
+    post['read'] = True
+    # Save the updated resource data back to the storage
+    save_resource_data(resource_data)
+
+    return jsonify({"message": "Post updated successfully", "post": post}), 200
 
 
 @app.route('/data/<path:path>')
