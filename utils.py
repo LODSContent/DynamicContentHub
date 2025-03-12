@@ -16,8 +16,12 @@ def extract_body(filename: str) -> str:
 
 def load_resource_data() -> dict:
     '''Function to load JSON data from a file.'''
-    with open('data/data.json', 'r') as file:
-        return json.load(file)
+    try:
+        with open('data/data.json', 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        # Return an empty dictionary if the file does not exist.
+        return {'posts': []}
 
 
 def save_resource_data(data: dict) -> None:
@@ -31,9 +35,9 @@ def replace_img_src(content: str) -> str:
     soup = BeautifulSoup(content, 'html.parser')
     for img_tag in soup.find_all('img'):
         # Extract the filename from the src attribute.
-        filename = img_tag['src'].split('\\')[-1]
+        filename = img_tag['src']
         # Replace the src attribute with the new path.
-        img_tag['src'] = f'./data/resources/{filename}'
+        img_tag['src'] = f'./data/resources/media/{filename}'
     return str(soup)
 
 

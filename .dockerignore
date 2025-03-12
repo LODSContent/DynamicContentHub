@@ -1,4 +1,4 @@
-data/resources/
+data/resources/data.json
 *.html
 *.png
 .venv
