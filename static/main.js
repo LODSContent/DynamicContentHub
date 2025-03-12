@@ -57,11 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const categoryDiv = document.createElement('div');
             categoryDiv.className = 'category';
 
+            const unreadCount = categoryPosts.filter(post => !post.read).length;
+
             const header = document.createElement('h3');
             header.className = 'category-header';
             header.innerHTML = `
                 <i class="fas fa-chevron-down"></i>
-                ${category}
+                ${category} <span class="badge" data-badge="${unreadCount}" style="${unreadCount > 0 ? '' : 'display: none;'}"></span>
             `;
 
             const itemsList = document.createElement('ul');
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             categoryPosts.forEach(post => {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `<a href="#" data-post-id="${post.id}" class="${post.read ? '' : 'unread'}">${post.title} <i class="fas fa-arrow-turn-up"></i></a>`;
+                listItem.innerHTML = `<a href="#" data-post-id="${post.id}" class="${post.read ? '' : 'unread'}">${post.title} <i class="fas fa-arrow-turn-up" style="${post.read ? '' : 'display: none;'}"></i></a>`;
                 itemsList.appendChild(listItem);
             });
 
@@ -96,6 +98,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Attach click handlers for all post links
         attachPostLinkHandlers();
+
+        // Maintain active class for the current post
+        if (currentPostId) {
+            document.querySelectorAll('.category-items a').forEach(link => {
+                if (parseInt(link.dataset.postId) === currentPostId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
     }
 
     async function markPostAsRead(postId) {
@@ -193,5 +206,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial fetch and periodic updates
     fetchAndUpdatePosts();
-    setInterval(fetchAndUpdatePosts, 3000);
+    setInterval(fetchAndUpdatePosts, 1000);
 });
