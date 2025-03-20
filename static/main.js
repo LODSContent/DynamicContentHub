@@ -113,18 +113,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function markPostAsRead(postId) {
         try {
-            const response = await fetch(`./api/posts/${postId}/read`, {
-                method: 'PATCH',
+            const response = await fetch(`./api/posts/read`, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ read: true })
+                body: JSON.stringify({ post_id: postId })
             });
-    
             if (!response.ok) {
                 throw new Error('Failed to mark post as read');
             }
-    
+
             const result = await response.json();
             console.log('Post marked as read:', result);
         } catch (error) {
