@@ -1,129 +1,80 @@
-# Dynamic Blog Application
-
-A Flask-based blog application with real-time content updates and dynamic category management.
-
-## Architecture Overview
-
-The application follows a client-server architecture with the following components:
-
-```
-[Client Browser] <----> [Flask Server] <----> [JSON Data Store]
-     |                       |
-     |                      |
-[Dynamic UI] <-----> [RESTful API]
-```
-
-## Key Components
-
-1. **Frontend Layer**
-   - Dynamic sidebar with category management
-   - Real-time content updates (5-second polling)
-   - Responsive design with mobile support
-   - Client-side routing and state management
-
-2. **Backend Layer**
-   - Flask web server
-   - RESTful API endpoints
-   - JSON-based data persistence
-   - Static file serving
-
-3. **Data Layer**
-   - JSON file storage
-   - Category-based content organization
-   - Post metadata management
-
+# DynamicContentHub
+DynamicContentHub is a Flask-based web application that dynamically displays categorized resources and posts. It allows users to browse, view, and interact with content in real-time.
 ## Features
 
-- 📱 Responsive design that works on desktop and mobile
-- 🔄 Real-time content updates without page refresh
-- 📂 Category-based post organization
-- 📝 Rich content support with images
-- ⚡ Fast and lightweight
-- 🎨 Clean and modern UI
+- **Dynamic Content Management**: Fetch and display categorized resources and blog posts dynamically.
+- **Real-Time Updates**: Automatically updates the UI when new content is added.
+- **Interactive Sidebar**: Expandable categories for easy navigation.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **RESTful API**: Provides endpoints for retrieving and creating posts.
 
-## File Structure
+## Project Structure
 
 ```
-├── assets/
-│   └── logo.svg              # Application logo
-├── css/
-│   └── style.css            # Application styles
-├── data/
-│   └── data.json            # Blog post data storage
-├── js/
-│   └── main.js              # Frontend JavaScript
-├── templates/
-│   ├── add_post.html        # Post creation template
-│   └── index.html           # Main application template
-├── main.py                  # Flask application server
-└── gunicorn_config.py       # Production server configuration
+DesignLab/
+├── main.py               # Main Flask application
+├── utils.py              # Utility functions for handling content and data
+├── templates/            # HTML templates for rendering views
+├── static/               # Static assets (CSS, JS, images)
+├── data/                 # Data storage for posts and resources
+├── docs/                 # Documentation files
+├── requirements.txt      # Python dependencies
+├── Dockerfile            # Docker configuration
+├── .gitignore            # Git ignore rules
+└── .dockerignore         # Docker ignore rules
 ```
 
-## Setup and Installation
+## API Endpoints
 
-1. Clone the repository
+### GET `/api/posts`
+Retrieves all blog posts.
+- **Response**: JSON array of posts.
+### POST `/api/posts`
+Creates a new blog post.
+- **Request Body**:
+  ```json
+  {
+    "title": "Post Title",
+    "category": "Category Name",
+    "content": "Content or file path"
+  }
+  ```
+
+- **Response**: JSON object with the created post.
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/DesignLab.git
+cd DesignLab
+```
+
+
 2. Install dependencies:
-   ```bash
-   pip install flask flask-sqlalchemy gunicorn flask-wtf
-   ```
-3. Start the development server:
-   ```bash
-   python main.py
-   ```
-4. For production, use Gunicorn:
-   ```bash
-   gunicorn main:app -c gunicorn_config.py
-   ```
-
-## API Documentation
-
-### Endpoints
-
-#### GET /api/posts
-Retrieves all blog posts
-
-Response:
-```json
-[
-  {
-    "id": 1,
-    "title": "Post Title",
-    "category": "Category",
-    "date": "YYYY-MM-DD",
-    "start": "start time",
-    "end": "end time",
-    "content": ["paragraph1", "paragraph2"],
-    "image": "image_url"
-  }
-]
+```bash
+pip install -r requirements.txt
 ```
 
-#### POST /api/posts
-Creates a new blog post
-
-Request Body:
-```json
-{
-  "title": "Post Title",
-  "category": "Category",
-  "content": ["paragraph1", "paragraph2"],
-  "image": "image_url",
-  "start": "optional start time",
-  "end": "optional end time"
-}
+3. Run the application:
+```bash
+python main.py
 ```
 
-## Tech Stack
+4. Access the app at `http://localhost:5050`
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Backend**: Flask (Python)
-- **Server**: Gunicorn
-- **Data Storage**: JSON file system
-- **UI Framework**: Custom CSS with Flexbox
+## Development
+- **Frontend**: Located in the `static/` directory (CSS, JS).
+- **Backend**: Flask application in `main.py` and utility functions in `utils.py`.
+- **Templates**: HTML files in the `templates/` directory.
+## Contributing
+Contributions are welcome! Please follow these steps:
 
-## Browser Support
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes and push the branch.
+4. Open a pull request.
+## License
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+This project is licensed under the MIT License. See the `LICENSE` file for details.
