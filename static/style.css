@@ -92,6 +92,34 @@ main {
     width: 100%;  /* Make container full width */
 }
 
+.category .badge::after {
+    content: attr(data-badge);
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 16px;
+    font-size: 0.75rem;
+}
+
+.category-items a.unread::after {
+    content: '1';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 16px;
+    font-size: 0.75rem;
+}
+
 /* Sidebar Toggle Button */
 .sidebar-toggle {
     position: fixed;

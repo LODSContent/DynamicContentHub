@@ -1,4 +1,3 @@
-data/resources/data.json
 *.html
 *.png
 .venv

@@ -14,10 +14,13 @@ RUN apt-get install curl -y
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
 
+# Install Gunicorn
+RUN python -m pip install gunicorn
+
 WORKDIR /app
 COPY . /app
 
 EXPOSE 5051
 
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["python", "main.py"]
+# Use Gunicorn to run the Flask application
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5051", "main:app"]
