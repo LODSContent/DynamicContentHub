@@ -6,6 +6,7 @@
     <title>Resources</title>
     <link rel="stylesheet" href=".{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href=".{{ url_for('static', filename='prism.css') }}">
 </head>
 <body>
     <header>
@@ -24,24 +25,25 @@
             <h2>Resources</h2>
             <!-- Categories will be dynamically populated by JavaScript -->
         </nav>
-
+        
         <article class="content">
             <div class="blog-navigation">
                 <button class="nav-button">Previous Resource</button>
                 <button class="nav-button">Show Latest Resource</button>
                 <button class="nav-button">Next Resource</button>
             </div>
-
+            
             <div class="blog-post">
                 <!-- Blog content will be dynamically populated by JavaScript -->
             </div>
         </article>
     </main>
-
+    
     <footer>
         <p>INSERT FOOTER HERE</p>
     </footer>
-
+    
+    <script src=".{{ url_for('static', filename='prism.js') }}" defer></script>
     <script src=".{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>
