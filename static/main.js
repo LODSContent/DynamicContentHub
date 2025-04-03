@@ -156,6 +156,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Mark the post as read
         markPostAsRead(postId);
+        // Highlight code blocks in the dynamically loaded content
+        if (typeof Prism !== 'undefined') {
+            Prism.highlightAllUnder(blogPost);
+        } else {
+            console.error('Prism.js is not loaded or initialized.');
+        }
     }
 
     // Function to fetch and update posts
