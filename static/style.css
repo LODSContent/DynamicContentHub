@@ -283,6 +283,12 @@ main {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
+code {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
 /* Footer Styles */
 footer {
     background-color: var(--header-blue);
