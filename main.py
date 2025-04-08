@@ -6,7 +6,10 @@ import logging
 from utils import (
     load_resource_data,
     save_resource_data,
-    add_post
+    add_post,
+    get_hidden_categories,
+    toggle_hidden_category,
+    validate_hidden_category_request
 )
 
 
@@ -90,6 +93,42 @@ def mark_post_as_read():
     app.logger.debug("Saved updated resource data")
     
     return jsonify({"message": "Post updated successfully", "post": post}), 200
+
+
+# GET endpoint for /api/hidden-categories
+@app.route('/api/hidden-categories', methods=['GET'])
+@log_request
+def get_hidden_categories_endpoint():
+    resource_data = load_resource_data()
+    hidden_categories = get_hidden_categories(resource_data)
+    return jsonify({"hidden_categories": hidden_categories}), 200
+
+
+
+@app.route('/api/toggle-hidden-category', methods=['POST'])
+@log_request
+def toggle_hidden_category_endpoint():
+    resource_data = load_resource_data()
+
+    # Check JSON content type
+    if not request.is_json:
+        return respond_with_error("Content-Type must be application/json", 400)
+
+    data = request.get_json()
+
+    # Validate the request data
+    category = data.get('category')
+    if not category or not isinstance(category, str):
+        return respond_with_error("Invalid or missing 'category' field. It must be a string.", 400)
+
+    # Toggle the hidden category
+    hidden_categories = toggle_hidden_category(resource_data, category)
+    save_resource_data(resource_data)
+
+    return jsonify({
+        "message": f"Category '{category}' toggled successfully",
+        "hidden_categories": hidden_categories
+    }), 200
 
 
 @app.route('/api/logs', methods=['GET'])

@@ -77,3 +77,34 @@ def add_post(data: dict) -> dict:
     save_resource_data(resource_data)
 
     return new_post
+
+
+def get_hidden_categories(resource_data):
+    """Retrieve the list of hidden categories."""
+    return resource_data.get('hidden_categories', [])
+
+
+def toggle_hidden_category(resource_data, category):
+    """Toggle a category in the hidden categories list."""
+    hidden_categories = resource_data.get('hidden_categories', [])
+
+    if category in hidden_categories:
+        hidden_categories.remove(category)
+    else:
+        hidden_categories.append(category)
+
+    resource_data['hidden_categories'] = hidden_categories
+    return hidden_categories
+
+
+def validate_hidden_category_request(data):
+    """Validate the request data for hidden categories."""
+    category = data.get('category')
+    action = data.get('action')
+
+    if not category or not isinstance(category, str):
+        return "Invalid or missing 'category' field. It must be a string."
+    if action not in ['add', 'remove']:
+        return "Invalid or missing 'action' field. It must be 'add' or 'remove'."
+
+    return None
