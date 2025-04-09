@@ -17,9 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Track expanded categories
-    const expandedCategories = new Set();
-
     function attachPostLinkHandlers() {
         document.querySelectorAll('.category-items a').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -36,7 +33,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function updateSidebar(newPosts) {
+
+    // Function to mark a category as hidden using toggle-hidden-category-endpoint
+    async function toggleHiddenCategory(category) {
+        try {
+            const response = await fetch(`./api/categories/hide`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ category })
+            });
+            if (!response.ok) {
+                throw new Error('Failed to hide category');
+            }
+
+            const result = await response.json();
+            console.log('Category hidden:', result);
+        } catch (error) {
+            console.error('Error hiding category:', error);
+        }
+    }
+
+
+    function updateSidebar(newPosts, hiddenCategories) {
         const categoriesContainer = document.querySelector('.sidebar');
         const titleElement = document.createElement('h2');
         titleElement.textContent = 'Resources';
@@ -59,15 +79,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const unreadCount = categoryPosts.filter(post => !post.read).length;
 
+
             const header = document.createElement('h3');
             header.className = 'category-header';
             header.innerHTML = `
                 <i class="fas fa-chevron-down"></i>
                 ${category} <span class="badge" data-badge="${unreadCount}" style="${unreadCount > 0 ? '' : 'display: none;'}"></span>
             `;
+    
 
             const itemsList = document.createElement('ul');
             itemsList.className = 'category-items';
+
+            // Hide specific categories if they are in the hiddenCategories array
+            if (hiddenCategories.includes(category)) {
+                itemsList.style.display = 'none'; // Hide specific categories
+                header.querySelector('.fa-chevron-down').style.transform = 'rotate(-90deg)';
+            }
 
             categoryPosts.forEach(post => {
                 const listItem = document.createElement('li');
@@ -80,15 +108,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const items = header.nextElementSibling;
                 const chevron = header.querySelector('.fa-chevron-down');
                 const isHidden = items.style.display === 'none';
-
+        
+ 
                 items.style.display = isHidden ? 'block' : 'none';
                 chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
-
-                if (isHidden) {
-                    expandedCategories.add(category);
-                } else {
-                    expandedCategories.delete(category);
-                }
+                console.log(`Category ${category} is now ${isHidden ? 'visible' : 'hidden'}`);
+                toggleHiddenCategory(category); 
             });
 
             categoryDiv.appendChild(header);
@@ -110,7 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-
+    
+    // Function to mark a post as read 
     async function markPostAsRead(postId) {
         try {
             const response = await fetch(`./api/posts/read`, {
@@ -164,6 +190,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // function to fetch hidden categories
+    async function fetchHiddenCategories() {
+        try {
+            const response = await fetch('./api/categories/hidden');
+            if (!response.ok) {
+                throw new Error('Failed to fetch hidden categories');
+            }
+            const hiddenCategories = await response.json();
+            return hiddenCategories['hidden_categories'];
+        } catch (error) {
+            console.error('Error fetching hidden categories:', error);
+            return []; // Return an empty array on error
+        }
+    }
+
     // Function to fetch and update posts
     async function fetchAndUpdatePosts() {
         try {
@@ -172,12 +213,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Failed to fetch posts');
             }
             const newPosts = await response.json();
-
+            const hiddenCategories = await fetchHiddenCategories(); 
+            console.log(hiddenCategories);
             // Check if there are any changes
             if (JSON.stringify(newPosts) !== JSON.stringify(posts)) {
                 console.log('Posts updated, refreshing display...');
                 posts = newPosts;
-                updateSidebar(posts);
+                updateSidebar(posts, hiddenCategories);
 
                 // If no post is currently displayed or it's the first load, show the latest post
                 if (!currentPostId && posts.length > 0) {
