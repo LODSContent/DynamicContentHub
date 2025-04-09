@@ -52,16 +52,25 @@ def create_post():
         return jsonify({"error": "Content-Type must be application/json"}), 400
 
     data = request.get_json()
+
+    # Check if data is a single post or a list of posts
+    if isinstance(data, dict):  # Single post
+        data = [data]
+    elif not isinstance(data, list):  # Invalid format
+        return jsonify({"error": "Request body must be a single post object or a list of post objects"}), 400
+
     required_fields = ['title', 'category', 'content']
-    
-    # Validate required fields
-    if not all(field in data for field in required_fields):
-        return jsonify({"error": f"Missing required fields. Required: {required_fields}"}), 400
-    
-    new_post = add_post(data)
+    new_posts = []
 
-    return jsonify({"message": "Post added successfully", "post": new_post}), 201
+    for post in data:
+        # Validate required fields for each post
+        if not all(field in post for field in required_fields):
+            return jsonify({"error": f"Each post must contain the required fields: {required_fields}"}), 400
 
+        new_post = add_post(post)
+        new_posts.append(new_post)
+
+    return jsonify({"message": "Posts added successfully", "posts": new_posts}), 201
 
 
 @app.route('/api/posts/read', methods=['POST'])

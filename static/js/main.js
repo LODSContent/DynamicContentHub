@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const newPosts = await response.json();
             const hiddenCategories = await fetchHiddenCategories(); 
-            console.log(hiddenCategories);
+
             // Check if there are any changes
             if (JSON.stringify(newPosts) !== JSON.stringify(posts)) {
                 console.log('Posts updated, refreshing display...');
