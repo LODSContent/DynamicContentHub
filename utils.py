@@ -86,7 +86,7 @@ def get_hidden_categories(resource_data):
 
 def toggle_hidden_category(resource_data, category):
     """Toggle a category in the hidden categories list."""
-    hidden_categories = resource_data.get('hidden_categories', [])
+    hidden_categories = get_hidden_categories(resource_data)
 
     if category in hidden_categories:
         hidden_categories.remove(category)

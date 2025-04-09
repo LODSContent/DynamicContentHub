@@ -96,7 +96,7 @@ def mark_post_as_read():
 
 
 # GET endpoint for /api/hidden-categories
-@app.route('/api/hidden-categories', methods=['GET'])
+@app.route('/api/categories/hidden', methods=['GET'])
 @log_request
 def get_hidden_categories_endpoint():
     resource_data = load_resource_data()
@@ -105,7 +105,7 @@ def get_hidden_categories_endpoint():
 
 
 
-@app.route('/api/toggle-hidden-category', methods=['POST'])
+@app.route('/api/categories/hide', methods=['POST'])
 @log_request
 def toggle_hidden_category_endpoint():
     resource_data = load_resource_data()
