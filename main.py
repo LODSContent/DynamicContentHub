@@ -9,7 +9,7 @@ from utils import (
     add_post,
     get_hidden_categories,
     toggle_hidden_category,
-    validate_hidden_category_request
+    update_latest_resources
 )
 
 
@@ -61,6 +61,7 @@ def create_post():
 
     required_fields = ['title', 'category', 'content']
     new_posts = []
+    post_ids = []
 
     for post in data:
         # Validate required fields for each post
@@ -69,6 +70,10 @@ def create_post():
 
         new_post = add_post(post)
         new_posts.append(new_post)
+        post_ids.append(new_post['id'])
+
+    # Update the latest resources with the new post IDs
+    update_latest_resources(post_ids)
 
     return jsonify({"message": "Posts added successfully", "posts": new_posts}), 201
 
