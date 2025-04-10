@@ -9,7 +9,8 @@ from utils import (
     add_post,
     get_hidden_categories,
     toggle_hidden_category,
-    update_latest_resources
+    update_latest_resources,
+    get_latest_resources
 )
 
 
@@ -108,6 +109,32 @@ def mark_post_as_read():
     
     return jsonify({"message": "Post updated successfully", "post": post}), 200
 
+
+@app.route('/api/posts/latest/unread', methods=['POST'])
+@log_request
+def mark_latest_posts_as_unread():
+    # Get the latest resource IDs
+    latest_post_ids = get_latest_resources()
+
+    # Load the resource data
+    resource_data = load_resource_data()
+
+    # Mark the posts as unread
+    updated_posts = []
+    for post in resource_data.get('posts', []):
+        if post['id'] in latest_post_ids:
+            post['read'] = False
+            updated_posts.append(post)
+
+    # Save the updated resource data
+    save_resource_data(resource_data)
+
+    return jsonify({
+        "message": "Latest posts marked as unread successfully",
+        "updated_posts": updated_posts
+    }), 200
+    
+    
 
 # GET endpoint for /api/hidden-categories
 @app.route('/api/categories/hidden', methods=['GET'])
