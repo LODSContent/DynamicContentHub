@@ -108,3 +108,18 @@ def validate_hidden_category_request(data):
         return "Invalid or missing 'action' field. It must be 'add' or 'remove'."
 
     return None
+
+def get_latest_resources() -> list:
+    """Retrieve the list of latest resource post IDs from the data file."""
+    resource_data = load_resource_data()
+    return resource_data.get('latest_resources', [])
+
+
+def update_latest_resources(post_ids: list) -> None:
+    """Update the list of latest resource post IDs in the data file."""
+    if not isinstance(post_ids, list) or not all(isinstance(post_id, int) for post_id in post_ids):
+        raise ValueError("post_ids must be a list of integers.")
+
+    resource_data = load_resource_data()
+    resource_data['latest_resources'] = post_ids
+    save_resource_data(resource_data)

@@ -34,6 +34,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
+    // Function to post /api/posts/latest/unread/ to be called by show latest resource button this updates the data.json on the backend the return is success or fail
+    async function showLatestResource() {
+        try {
+            const response = await fetch('./api/posts/latest/unread', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch latest resource');
+            }
+            const result = await response.json();
+            console.log('Latest resource:', result);
+        } catch (error) {
+            console.error('Error fetching latest resource:', error);
+        }
+    }
+    
+
     // Function to mark a category as hidden using toggle-hidden-category-endpoint
     async function toggleHiddenCategory(category) {
         try {
@@ -214,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const newPosts = await response.json();
             const hiddenCategories = await fetchHiddenCategories(); 
-            console.log(hiddenCategories);
+
             // Check if there are any changes
             if (JSON.stringify(newPosts) !== JSON.stringify(posts)) {
                 console.log('Posts updated, refreshing display...');
@@ -246,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const newIndex = currentIndex < posts.length - 1 ? currentIndex + 1 : 0;
                 displayPost(posts[newIndex].id);
             } else if (button.textContent === 'Show Latest Resource') {
-                displayPost(posts[posts.length - 1].id);
+                showLatestResource();
             }
         });
     });

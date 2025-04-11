@@ -9,7 +9,8 @@ from utils import (
     add_post,
     get_hidden_categories,
     toggle_hidden_category,
-    validate_hidden_category_request
+    update_latest_resources,
+    get_latest_resources
 )
 
 
@@ -52,16 +53,30 @@ def create_post():
         return jsonify({"error": "Content-Type must be application/json"}), 400
 
     data = request.get_json()
+
+    # Check if data is a single post or a list of posts
+    if isinstance(data, dict):  # Single post
+        data = [data]
+    elif not isinstance(data, list):  # Invalid format
+        return jsonify({"error": "Request body must be a single post object or a list of post objects"}), 400
+
     required_fields = ['title', 'category', 'content']
-    
-    # Validate required fields
-    if not all(field in data for field in required_fields):
-        return jsonify({"error": f"Missing required fields. Required: {required_fields}"}), 400
-    
-    new_post = add_post(data)
+    new_posts = []
+    post_ids = []
 
-    return jsonify({"message": "Post added successfully", "post": new_post}), 201
+    for post in data:
+        # Validate required fields for each post
+        if not all(field in post for field in required_fields):
+            return jsonify({"error": f"Each post must contain the required fields: {required_fields}"}), 400
 
+        new_post = add_post(post)
+        new_posts.append(new_post)
+        post_ids.append(new_post['id'])
+
+    # Update the latest resources with the new post IDs
+    update_latest_resources(post_ids)
+
+    return jsonify({"message": "Posts added successfully", "posts": new_posts}), 201
 
 
 @app.route('/api/posts/read', methods=['POST'])
@@ -94,6 +109,32 @@ def mark_post_as_read():
     
     return jsonify({"message": "Post updated successfully", "post": post}), 200
 
+
+@app.route('/api/posts/latest/unread', methods=['POST'])
+@log_request
+def mark_latest_posts_as_unread():
+    # Get the latest resource IDs
+    latest_post_ids = get_latest_resources()
+
+    # Load the resource data
+    resource_data = load_resource_data()
+
+    # Mark the posts as unread
+    updated_posts = []
+    for post in resource_data.get('posts', []):
+        if post['id'] in latest_post_ids:
+            post['read'] = False
+            updated_posts.append(post)
+
+    # Save the updated resource data
+    save_resource_data(resource_data)
+
+    return jsonify({
+        "message": "Latest posts marked as unread successfully",
+        "updated_posts": updated_posts
+    }), 200
+    
+    
 
 # GET endpoint for /api/hidden-categories
 @app.route('/api/categories/hidden', methods=['GET'])
